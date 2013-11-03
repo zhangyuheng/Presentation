@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Unleash your Vim</title>
+
+        <meta name="description" content="Vim">
+        <meta name="author" content="Yuheng Zhang">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/night.css" id="theme">
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section id="transitions">
+
+                    <h2>
+                        <a href="?theme=night.css&transition=linear#/themes">开始</a>
+                    </h2>
+                    <p>
+                        up down left right 翻页
+                    </p>
+                    <p>
+                        ESC 纵览
+                    </p>
+                    <p>
+                        F   全屏
+                    </p>
+                    <hr/>
+                    <p>
+                        <a onclick=location.href=location.href.replace("#","?print-pdf#")>可打印 PDF 版本</a>
+                    </p>
+                </section>
+                <section id="opening">
+                    <h1>unleash your Vim</h1>
+                    <h3>Vim 常用插件分享</h3>
+                    <p>
+                        <small>Created by <a href="#">张宇恒</a> / <a href="http://twitter.com/19910726">@zyhack</a></small>
+                    </p>
+                </section>
+
+                <section>
+                    <h2>本次分享的目的</h2>
+                    <p> 介绍一些常用的 Vim 插件</p>
+                    <p>分享一些使用心得 </p>
+
+                    <aside class="notes">
+                        Vim 的基础知识我就不介绍了，本次是 Vim 提高班
+                    </aside>
+                </section>
+
+                <section>
+                    <h2> 主推的几个插件 </h2>
+                    <ul>
+                        <li class="fragment"><strong>vundle</strong> -- 插件管理</li>
+                        <li class="fragment"><strong>airline</strong> -- 状态栏插件 </li>
+                        <li class="fragment"><strong>ctrlp</strong>  -- 文件切换插件</li>
+                        <li class="fragment"><strong>neosnippet</strong> -- 代码补全插件</li>
+                        <li class="fragment"><strong>syntastic</strong> -- 语法检查插件 </li>
+                        <li class="fragment"><strong>gitgutter</strong> -- git 辅助插件</li>
+                        <li class="fragment"><strong>fugitive</strong> -- git 调用插件 </li>
+                    </ul>
+                </section>
+                <section>
+                    <section>
+                        <h2>vundle</h2>
+                        <p> 插件的"管家" 把 github 作为插件的"源" </p>
+                        <p> step_1：配置中写需要安装的插件 </p>
+                        <p> 注释后可以关闭该插件 </p>
+                            <pre><code data-trim contenteditable class="Vim">
+Bundle 'scrooloose/nerdtree'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'kien/ctrlp.vim'
+Bundle 'terryma/vim-multiple-cursors'
+Bundle 'matchit.zip'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'bling/vim-airline'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'myusuf3/numbers.vim'
+Bundle 'vim-scripts/restore_view.vim'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'scrooloose/syntastic'
+Bundle 'tpope/vim-fugitive'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'godlygeek/tabular'
+Bundle 'majutsushi/tagbar'
+Bundle 'garbas/vim-snipmate'
+Bundle 'honza/vim-snippets'
+Bundle 'Shougo/neocomplcache'
+Bundle 'Shougo/neosnippet'
+Bundle 'honza/vim-snippets'
+Bundle 'Shougo/neocomplete.vim.git'
+Bundle 'Shougo/neosnippet'
+Bundle 'honza/vim-snippets'
+Bundle 'elzr/vim-json'
+Bundle 'pangloss/vim-javascript'
+Bundle 'amirh/HTML-AutoCloseTag'
+Bundle 'hail2u/vim-css3-syntax'
+Bundle 'tpope/vim-haml'
+Bundle 'jnwhiteh/vim-golang'
+Bundle 'spf13/vim-gocode'
+Bundle 'tpope/vim-markdown'
+Bundle 'vim-scripts/DrawIt'
+                        </pre></code>
+                    </section>
+                    <section>
+                        <p> step_2：执行相应的命令 </p>
+                        <pre><code data-trim contenteditable class="vim">
+:BundleInstall  安装  or   :BundleInstall! 安装且升级
+:BundleUpdate   升级
+:BundleClean    清理  or   :BundleClean! 不询问用户直接删除
+:BundleList     显示插件清单
+:BundleSearch   在线搜索插件
+                        </pre></code>
+                    </section>
+                    <section>
+                        <p> step_3：等待插件安装、升级、卸载 </p>
+                        <a class="image" href="./img/Unleash_your_Vim/vundle.png" target="_blank">
+                            <img width="" height="" src="./img/vundle.png" alt="vundle">
+                        </a>
+                    </section>
+                </section>
+
+
+                <section>
+                    <section>
+                        <h2>airline</h2>
+                        <p>在状态栏显示有用的信息，如:</p>
+                        <ul>
+                            <li class="fragment"><strong>当前编辑状态</strong></li>
+                            <li class="fragment"><strong>paste 是否打开</strong></li>
+                            <li class="fragment"><strong>是否只读模式</strong></li>
+                            <li class="fragment"><strong>git 版本信息</strong></li>
+                            <li class="fragment"><strong>属于版本库的文件修改情况</strong></li>
+                            <li class="fragment"><strong>语法检查报错信息</strong></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2> airline </h2>
+                        <a class="image" href="./img/Unleash_your_Vim/airline_1.png" target="_blank">
+                            <img width="" height="" src="./img/airline_1.png" alt="vundle">
+                        </a>
+                        <a class="image" href="./img/Unleash_your_Vim/airline_2.png" target="_blank">
+                            <img width="" height="" src="./img/airline_2.png" alt="vundle">
+                        </a>
+                                <p>只读</p>
+                        <a class="image" href="./img/Unleash_your_Vim/airline_3.png" target="_blank">
+                            <img width="" height="" src="./img/airline_3.png" alt="vundle">
+                        </a>
+                                <p>语法错误提示</p>
+                        <a class="image" href="./img/Unleash_your_Vim/airline_4.png" target="_blank">
+                            <img width="" height="" src="./img/airline_4.png" alt="vundle">
+                        </a>
+                    </section>
+                </section>
+
+
+                <section>
+                    <section>
+                        <h2>ctrlp</h2>
+                        <p>  在 file, buffer, mru 中模糊查询文件 </p>
+                        <p> 可以认为是 Vim 的 finder（mac 系统工具） </p>
+                    </section>
+                    <section>
+                        <h2>使用方法</h2>
+                        <pre><code data-trim contenteditable class="vim">
+ctrl + p   打开 ctrlp 插件
+ctrl + f   在已打开的 ctrlp 插件中切换 file/buffer/mru
+ctrl + c   退出 ctrlp
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h2>ctrlp</h2>
+                        <a class="image" href="./img/Unleash_your_Vim/ctrlp.png" target="_blank">
+                            <img width="" height="" src="./img/ctrlp.png" alt="">
+                        </a>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>neosnippet</h2>
+                        <p> 代码补全插件，支持多种语言，自动识别文件格式，启用相应的代码片段</p>
+                        <pre><code data-trim contenteditable class="vim">
+tab        向下选择
+ctrl + n   向下选择
+ctrl + p   向上选择
+ctrl + k   确认输入/使用代码插件
+                        </pre></code>
+                    </section>
+                    <!--
+                       -<section>
+                       -    <h2>c</h2>
+                       -    <a class="image" href="" target="_blank">
+                       -        <img width="" height="" src="./img/snip_1.png" alt="">
+                       -        <img width="" height="" src="./img/snip_2.png" alt="">
+                       -    </a>
+                       -</section>
+                       -->
+                    <section>
+                        <h2>python</h2>
+                        <a class="image" href="" target="_blank">
+                            <img width="" height="" src="./img/snip_3.png" alt="">
+                            <img width="" height="" src="./img/snip_4.png" alt="">
+                        </a>
+                    </section>
+                    <section>
+                        <h2>go</h2>
+                        <a class="image" href="" target="_blank">
+                            <img width="" height="" src="./img/snip_5.png" alt="">
+                            <img width="" height="" src="./img/snip_6.png" alt="">
+                        </a>
+                    </section>
+                    <section>
+                        <h2>perl pod 一键生成 </h2>
+                        <a class="image" href="" target="_blank">
+                            <img width="" height="" src="./img/snip_7.png" alt="">
+                            <img width="" height="" src="./img/snip_8.png" alt="">
+                        </a>
+                    </section>
+                    <section>
+                        <h2>html</h2>
+                        <!--
+                           -<a class="image" href="" target="_blank">
+                           -    <img width="" height="" src="./img/snip_9.png" alt="">
+                           -    <img width="" height="" src="./img/snip_10.png" alt="">
+                           -</a>
+                           -->
+                    </section>
+                    <section>
+                        <h2>javascript</h2>
+                        <!--
+                           -<a class="image" href="" target="_blank">
+                           -    <img width="" height="" src="./img/snip_11.png" alt="">
+                           -    <img width="" height="" src="./img/snip_12.png" alt="">
+                           -    <img width="" height="" src="./img/snip_13.png" alt="">
+                           -    <img width="" height="" src="./img/snip_14.png" alt="">
+                           -</a>
+                           -->
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>syntastic</h2>
+                        <p> 在状态栏右下角提示语法错误，多语言支持</p>
+                        <p> 按照内置规则检查，或者调用外部程序检查源代码文件</p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>gitgutter & fugitive</h2>
+                        <p>配合 git 使用的精良的工具</p>
+                    </section>
+                    <section>
+                        <h2>gitgutter</h2>
+                        <p>自动显示源代码哪些行作了修改，开/关高亮突出显示</p>
+                        <p>修改前</p>
+                        <a class="image" href="" target="_blank">
+                            <img width="" height="" src="./img/gitgutter_1.png" alt="">
+                        </a>
+                    </section>
+                    <section>
+                        <h2>gitgutter</h2>
+                        <p>修改后</p>
+                        <a class="image" href="" target="_blank">
+                            <img width="" height="" src="./img/gitgutter_2.png" alt="">
+                        </a>
+                    </section>
+                    <section>
+                        <h2>fugitive</h2>
+                        <p>对 git 的完备支持</p>
+                        <pre><code data-trim contenteditable class="vim">
+:Git [args]             Run an arbitrary git command. Similar to :!git [args]
+                        but chdir to the repository tree first.
+
+                                                *fugitive-:Git!*
+:Git! [args]            Like |:Git|, but capture the output into a temp file,
+                        and edit that temp file.
+
+                                                *fugitive-:Gcd*
+:Gcd [directory]        |:cd| relative to the repository.
+
+                                                *fugitive-:Glcd*
+:Glcd [directory]       |:lcd| relative to the repository.
+
+                                                *fugitive-:Gstatus*
+:Gstatus                Bring up the output of git-status in the preview
+                        window.  The following maps, which work on the cursor
+                        line file where sensible, are provided:
+
+                        <C-N> next file
+                        <C-P> previous file
+                        <CR>  |:Gedit|
+                        -     |:Git| add
+                        -     |:Git| reset (staged files)
+                        cA    |:Gcommit| --amend --reuse-message=HEAD
+                        ca    |:Gcommit| --amend
+                        cc    |:Gcommit|
+                        cva   |:Gcommit| --amend --verbose
+                        cvc   |:Gcommit| --verbose
+                        D     |:Gdiff|
+                        ds    |:Gsdiff|
+                        dp    |:Git!| diff (p for patch; use :Gw to apply)
+                        dp    |:Git| add --intent-to-add (untracked files)
+                        dv    |:Gvdiff|
+                        O     |:Gtabedit|
+                        o     |:Gsplit|
+                        p     |:Git| add --patch
+                        p     |:Git| reset --patch (staged files)
+                        q     close status
+                        R     reload status
+                        S     |:Gvsplit|
+
+                                                *fugitive-:Gcommit*
+:Gcommit [args]         A wrapper around git-commit.  If there is nothing
+                        to commit, |:Gstatus| is called instead.  Unless the
+                        arguments given would skip the invocation of an editor
+                        (e.g., -m), a split window will be used to obtain a
+                        commit message.  Write and close that window (:wq or
+                        |:Gwrite|) to finish the commit.  Unlike when running
+                        the actual git-commit command, it is possible (but
+                        unadvisable) to muck with the index with commands like
+                        git-add and git-reset while a commit message is
+                        pending.
+
+                                                *fugitive-:Ggrep*
+:Ggrep [args]           |:grep| with git-grep as 'grepprg'.
+
+                                                *fugitive-:Glgrep*
+:Glgrep [args]          |:lgrep| with git-grep as 'grepprg'.
+
+                                                *fugitive-:Glog*
+:Glog [args]            Load all previous revisions of the current file into
+                        the quickfix list.  Additional git-log arguments can
+                        be given (for example, --reverse).  If "--" appears as
+                        an argument, no file specific filtering is done, and
+                        previous commits rather than previous file revisions
+                        are loaded.
+
+                                                *fugitive-:Gllog*
+:Gllog [args]           Like |:Glog|, but use the location list instead of the
+                        quickfix list.
+
+                                        *fugitive-:Gedit* *fugitive-:Ge*
+:Gedit [revision]       |:edit| a |fugitive-revision|.
+
+                                                *fugitive-:Gsplit*
+:Gsplit [revision]      |:split| a |fugitive-revision|.
+
+                                                *fugitive-:Gvsplit*
+:Gvsplit [revision]     |:vsplit| a |fugitive-revision|.
+
+                                                *fugitive-:Gtabedit*
+:Gtabedit [revision]    |:tabedit| a |fugitive-revision|.
+
+                                                *fugitive-:Gpedit*
+:Gpedit [revision]      |:pedit| a |fugitive-revision|.
+
+:Gsplit! [args]                 *fugitive-:Gsplit!* *fugitive-:Gvsplit!*
+:Gvsplit! [args]                *fugitive-:Gtabedit!* *fugitive-:Gpedit!*
+:Gtabedit! [args]       Like |:Git!|, but open the resulting temp file in a
+:Gpedit! [args]         split, tab, or preview window.
+
+                                                *fugitive-:Gread*
+:Gread [revision]       Empty the buffer and |:read| a |fugitive-revision|.
+                        When the argument is omitted, this is similar to
+                        git-checkout on a work tree file or git-add on a stage
+                        file, but without writing anything to disk.
+
+:{range}Gread [revision]
+                        |:read| in a |fugitive-revision| after {range}.
+
+                                                *fugitive-:Gread!*
+:Gread! [args]          Empty the buffer and |:read| the output of a Git
+                        command.  For example, :Gread! show HEAD:%.
+
+:{range}Gread! [args]  |:read| the output of a Git command after {range}.
+
+                                        *fugitive-:Gw* *fugitive-:Gwrite*
+:Gwrite                 Write to the current file's path and stage the results.
+                        When run in a work tree file, it is effectively git
+                        add.  Elsewhere, it is effectively git-checkout.  A
+                        great deal of effort is expended to behave sensibly
+                        when the work tree or index version of the file is
+                        open in another buffer.
+
+:Gwrite {path}          You can give |:Gwrite| an explicit path of where in
+                        the work tree to write.  You can also give a path like
+                        :0:foo.txt or even :0 to write to just that stage in
+                        the index.
+
+                                                *fugitive-:Gwq*
+:Gwq [path]             Like |:Gwrite| followed by |:quit| if the write
+                        succeeded.
+
+:Gwq! [path]            Like |:Gwrite|! followed by |:quit|! if the write
+                        succeeded.
+
+                                                *fugitive-:Gdiff*
+:Gdiff [revision]       Perform a |vimdiff| against the current file in the
+                        given revision.  With no argument, the version in the
+                        index is used (which means a three-way diff during a
+                        merge conflict, making it a git-mergetool
+                        alternative).  The newer of the two files is placed
+                        to the right.  Use |do| and |dp| and write to the
+                        index file to simulate "git add --patch".
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h2>fugitive</h2>
+                        <p>输入 :gd  tab补全，在 vimdiff 内预览 git diff</p>
+                        <a class="image" href="" target="_blank">
+                            <img width="" height="" src="./img/fugitive.png" alt="">
+                        </a>
+                    </section>
+                </section>
+
+
+                <section>
+                    <h2> 推荐安装方法 </h2>
+                    <p>
+                        <strong><a href="http://vim.spf13.com/">spf13</a></strong> -- vim 插件集合，全自动安装
+                    </p>
+                    <!--
+                       -<p>
+                       -    <strong><a href="https://github.com/zhangyuheng/spf13-vim" >spf13 精简版</a></strong> -- 删除不需要的扩展(如 ruby 相关）
+                       -</p>
+                       -->
+                </section>
+
+
+                <section>
+                    <h1>Thanks!</h1>
+                    <h3>happy Viming! </h3>
+                </section>
+
+            </div>
+
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+
+        </script>
+
+    </body>
+</html>

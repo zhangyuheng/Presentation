@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Javascript Function Expressions</title>
+
+        <meta name="description" content="Javascript Function Expressions">
+        <meta name="author" content="Yuheng Zhang">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <!--
+           -<link rel="stylesheet" href="css/theme/default.css" id="theme">
+           -->
+        <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section id="transitions">
+
+                    <h2>
+                        <a href="?theme=sky.css&transition=linear#/themes">开始</a>
+                    </h2>
+                    <p>
+                        up down left right 翻页
+                    </p>
+                    <p>
+                        ESC 纵览
+                    </p>
+                    <p>
+                        F   全屏
+                    </p>
+                    <hr/>
+                    <p>
+                        <a onclick=location.href=location.href.replace("#","?print-pdf#")>可打印 PDF 版本</a>
+                    </p>
+                    <!--<p> 主题: </p>-->
+                        <!--<p>-->
+                            <!--<a href="?#/themes">Default</a> --->
+                            <!--<a href="?transition=linear&theme=sky#/themes">Sky</a> --->
+                            <!--<a href="?transition=linear&theme=beige#/themes">Beige</a> --->
+                            <!--<a href="?transition=linear&theme=simple#/themes">Simple</a> --->
+                            <!--<a href="?transition=linear&theme=serif#/themes">Serif</a> --->
+                            <!--<a href="?transition=linear&theme=night#/themes">Night</a> <br>-->
+                            <!--<a href="?transition=linear&theme=moon.css#/themes">Moon</a> --->
+                            <!--<a href="?transition=linear&theme=simple.css#/themes">Simple</a> --->
+                            <!--<a href="?transition=linear&theme=solarized.css#/themes">Solarized</a>-->
+                        <!--</p>-->
+                </section>
+
+                <section id="opening">
+                    <h2>Javascript 函数表达式</h2>
+                    <p>
+                        <small>Created by <a href="#">张宇恒</a> / <a href="http://twitter.com/19910726">@zyhack</a></small>
+                    </p>
+                </section>
+
+                <section>
+                    <h3>基本介绍</h3>
+                    <p class="fragment"> Javascript 是一门<a href="http://en.wikipedia.org/wiki/JavaScript#Features" target="_blank">函数式面向对象编程语言</a></p>
+                    <p class="fragment"> Javascript 中函数是一等公民 (<a href="http://en.wikipedia.org/wiki/First-class_function" target="_blank"> First-class function</a>) </p>
+                    <p class="fragment"> Javascript 中函数本身就是对象 </p>
+                    <p class="fragment"> Javascript 是第一个成为<strong>主流</strong>的 Lambda 语言 </p>
+                    <p class="fragment"> 函数表达式是 Javascript 中既强大又容易令人困惑的特性 </p>
+                </section>
+
+                <section>
+                    <h3>函数定义的两种方式</h3>
+                    <p class="fragment"> 一、函数声明 </p>
+                    <pre class="fragment"><code data-trim contenteditable class="javascript">
+function functionName(agr0, arg1, arg2) {
+// ...
+}
+                    </code></pre>
+                    <p class="fragment"> 二、函数表达式 </p>
+                    <pre class="fragment"><code data-trim contenteditable class="javascript">
+var functionName = function(arg0, arg1, arg2){
+// ...
+}
+                    </code></pre>
+                    <small class="fragment"> 这种形式是创建了一个<a href="http://en.wikipedia.org/wiki/Lambda_calculus">匿名函数</a>(有时也叫<a href="http://en.wikipedia.org/wiki/Lambda_calculus">Lambda</a>)并将它赋值给变量 functionName </small>
+                </section>
+
+                <section>
+                    <h2>两种方式的区别</h2>
+                    <small class="fragment">函数声明不同于函数表达式的特征：前者的<strong>函数声明提升</strong></small>
+                    <small class="fragment">意思是在执行代码前会先读取函数声明，可以把函数声明放在调用它的语句后面</small>
+                    <p class="fragment">可以这样写</p>
+                    <pre class="fragment"><code data-trim contenteditable class="javascript">
+sayHi();
+function sayHi() {
+    console.log("OK");
+}
+                    </code></pre>
+                    <p class="fragment">不能这样写</p>
+                    <pre class="fragment"><code data-trim contenteditable class="javascript">
+sayHi(); // error 函数还不存在
+var sayHi = function () {
+    console.log("OK");
+}
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>递归</h3>
+                    <small>递归阶乘函数，通过名字调用自身</small>
+                    <pre class="fragment"><code data-trim contenteditable class="javascript">
+function factorial(num) {
+    if (num <= 1) {
+        return 1;
+    } else {
+        return num * factorial(num-1);
+    }
+}
+                    </code></pre>
+                    <h4 class="fragment">表面上看没什么问题，但是下面的代码会出错</h4>
+                    <pre class="fragment"><code data-trim contenteditable class="javascript">
+var anotherFactorial = factorial;
+factorial = null;
+console.log(anotherFactorial(4));
+                    </code></pre>
+                    <small class="fragment">以上代码把函数保存在变量 anotherFactorial 中，然后将 factorial 变量设置为 null，结果指向原始函数的引用只剩下一个。而接下来调用 anotherFactorial() 时，由于必须执行 factorial()，所以就会报错</small>
+                </section>
+
+                <section>
+                    <h4>好的做法</h4>
+                    <small>使用 <code>arguments.callee（一个指向正在执行的函数的指针）</code></small>
+                    <pre class="fragment"><code data-trim contenteditable class="javascript">
+function factorial(num) {
+    if (num <= 1) {
+        return 1;
+    } else {
+        return num * arguments.callee(num-1);
+    }
+}
+                    </code></pre>
+                    <small class="fragment">但是在严格模式下(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode">ES5 strict mode</a>)，不能直接访问 arguments.callee</small>
+                    <h4 class="fragment">更好的做法，在严格和非严格模式都行得通</h4>
+                    <small class="fragment">创建名为 f() 的命名函数表达式，即使把重新赋值 factorial，anotherFactorial 中函数名字 f 仍然有效</small>
+                    <pre class="fragment"><code data-trim contenteditable class="javascript">
+var factorial = (function f(num) {
+    if (num <= 1) {
+        return 1;
+    } else {
+        return num * f(num-1);
+    }
+});
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>闭包</h3>
+                    <p>闭包是指有权访问另一个函数作用域中的变量的函数</p>
+                    <p class="fragment">在一个函数内部创建另一个函数就创建了闭包</p>
+                    <pre class="fragment"><code data-trim contenteditable class="javascript">
+function createCountFunction(num) {
+    return function(){
+        num++;
+        console.log(num);
+    };
+}
+
+// 创建函数
+var count_a = createCountFunction(0);
+var count_b = createCountFunction(10);
+
+// 调用函数
+for (var i = 0; i < 3; i ++) {
+    count_a();
+    count_b();
+}
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h4>原理</h4>
+                    <pre><code data-trim contenteditable class="javascript">
+function createCountFunction(num) {
+    return function(){
+        num++;  //关键在这里，num 不是在内部定义的
+                //因此会将 addFrom() 函数的活动对象添加到它的作用域链中
+                //这样匿名函数就可以访问在 addFrom() 中定义的所有变量
+        console.log(num);
+    };
+}
+
+var count_a = createCountFunction(0);
+var count_b = createCountFunction(10);
+
+for (var i = 0; i < 3; i ++) {
+    count_a(); // 调用三次，输出保持了对同一个变量的引用，值会递增 num => 1,2,3
+    count_b();
+}
+                    </code></pre>
+                    <small>内部匿名函数的作用域链中保持了对外部函数变量 num 的引用，在外部函数退出后，外部函数的活动对象不会被销毁，仍然留在内存中，直到匿名函数被销毁</small>
+                    <pre><code data-trim contenteditable class="javascript">
+//解除对匿名函数的引用（以便释放内存）
+count_a = null;
+count_b = null;
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h4>图解</h4>
+                        <a class="image" href="./img/Javascript_Function_Expression/scope_chain.png" target="_blank">
+                            <img width="" height="" src="./img/Javascript_Function_Expression/scope_chain.png" alt="scope_chain">
+                        </a>
+                </section>
+
+                <section>
+                    <h4>使用前先理解 - 避免出错</h4>
+                    <small>闭包保存的是外层函数的变量对象，保存的是引用的值</small>
+                    <small>如果使用不当，可能会出现下面的错误</small>
+                    <pre><code data-trim contenteditable class="javascript">
+function createFunctions() {
+    var result = []; // var result = new Array();
+    for (var i=0; i < 5; i++) {
+        result[i] = function() {
+            console.log(i);
+        };
+    }
+    return result;
+}
+
+//创建函数数组
+var functionList = createFunctions();
+
+//检查函数输出
+for (var i=0; i < functionList.length; i++) {
+    functionList[i]();
+}
+                    </code></pre>
+                    <small>表面上看，返回的每个函数都应该返回自己的索引值，即索引值 0 的函数输出 0，以此类推</small>
+                    <small>实际上每个函数都输出 6，每个函数的作用域链中都保存着 createFunctions() 函数的活动对象，它们引用的都是同一个变量 i</small>
+                    <small>当 createFunctions() 返回后，变量 i 的值是 5</small>
+                </section>
+
+                <section>
+                    <h4>理解之后使用 - 让结果符合预期</h4>
+                    <small>解决方案：创建另一个匿名函数</small>
+                    <pre><code data-trim contenteditable class="javascript">
+function createFunctions() {
+    var result = []; // var result = new Array();
+    for (var i=0; i < 5; i++) {
+        result[i] = function(num) {
+            return function() {
+                console.log(num);
+            };
+        }(i);
+    }
+    return result;
+}
+
+var functionList = createFunctions();
+
+for (var i=0; i < functionList.length; i++) {
+    functionList[i]();
+}
+                    </code></pre>
+                    <small>在这个版本中，我们没有直接把闭包赋值给数组，而是定义了一个匿名函数，并将立即执行该匿名函数的结果赋值给数组。</small>
+                    <small>匿名函数有一个参数 num，每次调用时传入了变量 i，由于参数是按照值传递的，所以 i 的当前值就复制给了 num。</small>
+                    <small>而在这个函数内部，又创建了一个访问 num 的闭包，这样一来，result 数组中的每个函数都有自己 num 变量的一个副本，可以输出不同的值</small>
+                </section>
+
+                <section>
+                    <h3>this 对象和闭包</h3>
+                    <pre><code data-trim contenteditable class="javascript">
+var name = "global";
+
+var obj = {
+    name : "local",
+
+    getNameFunc : function(){
+        return function(){
+            return this.name;
+        }
+    }
+}
+
+console.log(obj.getNameFunc()()); //"global"
+                    </code></pre>
+                    <small>this 对象是在运行时基于函数的执行环境绑定的：在全局函数中，this 等于 window</small>
+                    <small>而当函数被作为某个对象的方法调用时，this 等于那个对象</small>
+                    <small>匿名函数的执行环境具有全局性，因此其 this 通常指向 window</small>
+                    <small>在通过 call() 或者 apply() 改变函数执行环境的情况下，this 就指向其他对象</small>
+                </section>
+
+                <section>
+                    <h4>保存 this 对象，让闭包能访问</h4>
+                    <pre><code data-trim contenteditable class="javascript">
+var name = "global";
+
+var obj = {
+    name : "local",
+
+    getNameFunc : function(){
+        var that = this;
+        return function(){
+            return that.name;
+        }
+    }
+}
+
+console.log(obj.getNameFunc()()); //"local"
+                    </code></pre>
+                    <small>在函数执行时，会自动获取两个特殊变量：this 和 arguments。</small>
+                    <small>函数按照作用域链的顺序，首先在其活动对象搜索到了这两个变量，就停止往”上”搜索外部函数</small>
+                    <small>先把 this 赋值给 that，闭包可以访问 that，that 也引用着 obj</small>
+                </section>
+
+                <section>
+                    <h3>私有作用域</h3>
+                    <small>Javascript 作用域不是块级作用域，而是函数作用域</small>
+                    <small>下面可以实现私有作用域</small>
+                    <pre><code data-trim contenteditable class="javascript">
+var someFunc = function(){};
+someFunc   <=====>  function(){}
+someFunc() <=====>  function(){}()
+// 必须加上括号表示是一个函数表达式，而不是以关键字 function 开头的函数声明
+someFunc() <=====>  (function(){})();
+                    </code></pre>
+                    <small>实例</small>
+                    <pre><code data-trim contenteditable class="javascript">
+
+(function() {
+    var now = new Date();
+    if (now.getMonth() == 0 && now.getDate() == 1) {
+        console.log("Happy new year!");
+    }
+})();
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>私有变量和特权方法</h3>
+                    <small>在函数内部创建一个闭包，通过闭包的作用域链就能访问这些变量</small>
+                    <small>能够访问私有变量和私有函数的公共方法称为<strong>特权方法</strong></small>
+                    <pre><code data-trim contenteditable class="javascript">
+function MyObject() {
+
+    //私有变量和私有函数
+    var privateVariable = 10;
+
+    function privateFunction() {
+        return false;
+    }
+
+    //特权方法
+    this.publicMethod = function() {
+        privateVariable++;
+        return privateFunction();
+    }
+}
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h4>特权方法 - 实例</h4>
+                    <small>利用私有和特有成员，可以隐藏不应该被直接修改的 name，唯一途径就是用 getName() 和 setName()</small>
+                    <small>私有变量 name 在 Car 的每个实例中都不相同</strong></small>
+                    <pre><code data-trim contenteditable class="javascript">
+function Car(name) {
+
+    //特权方法，外部只能通过它访问私有变量 name
+    this.getName = function() {
+        return name;
+    }
+    this.setName = function(value) {
+        name = value;
+    }
+}
+
+var myCar = new Car("Bumblebee");
+myCar.getName();             //"Bumblebee"
+myCar.setName("Ironhide");
+myCar.getName();             //"Ironhide"
+
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h4>静态私有变量</h4>
+                    <small>为了避免针对每个实例都创建同样一组新方法，可以使用静态私有变量来实现特权方法</small>
+                    <pre><code data-trim contenteditable class="javascript">
+(function() {
+    //私有变量和私有函数
+    var privateVariable = 10;
+    function privateFunction(){
+        return false;
+    }
+
+    //构造函数
+    MyObject = function() {
+    };
+
+    //公有/特权方法
+    MyObject.prototype.publicMethod = function(){
+        privateVariable++;
+        return privateFunction();
+    }
+})();
+                    </code></pre>
+                    <small>公有方法是在原型（prototype）基础上定义的，体现了<strong>原型模式</strong></small>
+                    <small>MyObject 是全局变量，能在私有作用域之外被访问到</small>
+                    <small>这个模式与在构造函数中定义特权方法的区别是<strong>私有变量和函数是由实例共享的</strong>。</small>
+                </section>
+
+                <section>
+                    <h4>静态私有变量 - 实例</h4>
+                    <small>为了避免针对每个实例都创建同样一组新方法，可以使用静态私有变量来实现特权方法</small>
+                    <pre><code data-trim contenteditable class="javascript">
+(function() {
+    var name = "";
+
+    Car = function(value){
+        name = value;
+    };
+
+    Car.prototype.getName = function() {
+        return name;
+    };
+
+    Car.prototype.setName = function(value) {
+        name = value;
+    };
+})();
+
+var myCar = new Car("Bumblebee");
+myCar.getName();             //"Bumblebee"
+myCar.setName("Ironhide");
+myCar.getName();             //"Ironhide"
+
+var Toy = new Car("Optimus");
+toy.getName();               //"Optimus"
+myCar.getName();             //"Optimus"
+                    </code></pre>
+                    <small>公有方法是在原型（prototype）基础上定义的，体现了<strong>原型模式</strong></small>
+                    <small>MyObject 是全局变量，能在私有作用域之外被访问到</small>
+                    <small>这个模式与在构造函数中定义特权方法的区别是<strong>私有变量和函数是由实例共享的</strong>。</small>
+                </section>
+
+                <section>
+                    <h4>模块模式</h4>
+                    <small>为单例(singleton)创建私有变量和特权方法</small>
+                    <pre><code data-trim contenteditable class="javascript">
+var cop = function() {
+
+    //私有变量和函数
+    var applications = []; //var applications = new Array;
+
+    //初始化
+    applications.push("base");
+
+    //公共
+    return {
+        getApplications : function(){
+            return applications;
+        },
+
+        registerApplication : function(app) {
+            applications.push(app);
+        }
+    };
+}();
+
+cop.getapplications();          // ["base"]
+cop.registerApplication("FC");
+cop.getapplications();          // ["base","FC"]
+
+                    </code></pre>
+                    <small>在 Web 应用中，经常需要使用一个单例来管理应用程序级的信息</small>
+                    <small>例子中创建了一个用于管理应用的 cop 对象</small>
+                    <small>applications 数组是私有变量，同时公开了 getApplications() 和 registerApplication() 两个方法用于查看和注册新组件</small>
+                </section>
+
+                <section>
+                    <h4>增强的模块模式</h4>
+                    <small>适用于单例必须是某种类型的实例</small>
+                    <pre><code data-trim contenteditable class="javascript">
+function Platform() {
+    Platform.prototype.company = "ChinaCache";
+}
+
+var cop = function() {
+
+    //私有变量和函数
+    var applications = []; //var applications = new Array;
+
+    //初始化
+    applications.push("base");
+
+    //创建 cop 的一个局部副本
+    var _cop = new Platform();
+
+    //公共
+    _cop.getApplications = function(){
+        return applications;
+    };
+
+    _cop.registerApplication = function(app) {
+        applications.push(app);
+    };
+
+    //返回这个副本
+    return _cop;
+}();
+cop.company();                  // "ChinaCache"
+cop.getapplications();          // ["base"]
+cop.registerApplication("FC");
+cop.getapplications();          // ["base","FC"]
+
+                    </code></pre>
+                    <small>在 Web 应用中，经常需要使用一个单例来管理应用程序级的信息</small>
+                    <small>例子中创建了一个用于管理应用的 cop 对象</small>
+                    <small>applications 数组是私有变量，同时公开了 getApplications() 和 registerApplication() 两个方法用于查看和注册新组件</small>
+                </section>
+
+                <section>
+                    <h3>reference</h3>
+                        <a class="image" href="http://www.flickr.com/photos/52172912@N04/10641970664/" target="_blank">
+                            <img width="183px" height="240px" src="http://farm4.staticflickr.com/3773/10641970664_6173ca34ef_m.jpg" alt="Javascript: The Good Parts">
+                        </a>
+                        <a class="image" href="http://www.flickr.com/photos/52172912@N04/10628863003/" target="_blank">
+                            <img width="190px" height="240px" src="http://farm4.staticflickr.com/3817/10628863003_e0691d6959.jpg" alt="Professional JavaScript for Web Developers">
+                        </a>
+                        <p>
+                        <a class="image" href="http://en.wikipedia.org/wiki/Javascript" target="_blank">
+                            <img width="" height="" src="http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png" alt="Wikipedia">
+                        </a>
+                        </p>
+                </section>
+                <section>
+                    <h1>Thanks!</h1>
+                    <h2>Q&A </h2>
+                </section>
+
+            </div>
+
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+
+        </script>
+
+    </body>
+</html>
