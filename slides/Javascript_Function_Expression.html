@@ -51,19 +51,25 @@
                         F   全屏
                     </p>
                     <hr/>
-                    <p>
-                        <a onclick=location.href=location.href.replace("#","?print-pdf#")>可打印 PDF 版本</a>
-                    </p>
+                    <small style="cursor: pointer;">
+                        <script>
+                            document.write( window.location.search.match( /print-pdf/gi ) ?
+                                    '<a onclick=window.print();>save as PDF</a><br/>' +
+                                '<a onclick=location.href=location.href.replace("?print-pdf#","#")> 演示版本</a>':
+                                '<a onclick=location.href=location.href.replace("#","?print-pdf#")> PDF 版本</a>'
+                            );
+                        </script>
+                    </small>
                     <!--<p> 主题: </p>-->
                         <!--<p>-->
-                            <!--<a href="?#/themes">Default</a> --->
-                            <!--<a href="?transition=linear&theme=sky#/themes">Sky</a> --->
-                            <!--<a href="?transition=linear&theme=beige#/themes">Beige</a> --->
-                            <!--<a href="?transition=linear&theme=simple#/themes">Simple</a> --->
-                            <!--<a href="?transition=linear&theme=serif#/themes">Serif</a> --->
+                            <!--<a href="?#/themes">Default</a> -->
+                            <!--<a href="?transition=linear&theme=sky#/themes">Sky</a> -->
+                            <!--<a href="?transition=linear&theme=beige#/themes">Beige</a> -->
+                            <!--<a href="?transition=linear&theme=simple#/themes">Simple</a> -->
+                            <!--<a href="?transition=linear&theme=serif#/themes">Serif</a> -->
                             <!--<a href="?transition=linear&theme=night#/themes">Night</a> <br>-->
-                            <!--<a href="?transition=linear&theme=moon.css#/themes">Moon</a> --->
-                            <!--<a href="?transition=linear&theme=simple.css#/themes">Simple</a> --->
+                            <!--<a href="?transition=linear&theme=moon.css#/themes">Moon</a> -->
+                            <!--<a href="?transition=linear&theme=simple.css#/themes">Simple</a> -->
                             <!--<a href="?transition=linear&theme=solarized.css#/themes">Solarized</a>-->
                         <!--</p>-->
                 </section>
