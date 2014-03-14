@@ -7,4 +7,3 @@ e.g.
 ln -s slides/Javascript_Function_Expression.html index.html && grunt serve
 ```
 **Enjoy making presentation cool again!**
-
